@@ -7,8 +7,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       localStream: null,
-      myId: null,
+      myId: "",
+      theirId: "",
     };
+    this.peer = new Peer({
+      key: process.env.REACT_APP_SKYWAY_API_KEY,
+      debug: 3
+    });
   }
 
   componentDidMount() {
@@ -23,20 +28,40 @@ class App extends React.Component {
       return;
     });
 
-    const peer = new Peer({
-      key: process.env.REACT_APP_SKYWAY_API_KEY,
-      debug: 3
+    this.peer.on('open', () => {
+      this.setState({myId: this.peer.id})
     });
-    peer.on('open', () => {
-      this.setState({myId: peer.id})
+    this.peer.on('call', mediaConnection => {
+      mediaConnection.answer(this.state.localStream);
+      this.setEventListener(mediaConnection);
     });
+  }
+
+  makeCall() {
+    const mediaConnection = this.peer.call(this.state.theirId, this.state.localStream);
+    this.setEventListener(mediaConnection);
+  }
+
+  setEventListener = (mediaConnection) => {
+    mediaConnection.on('stream', stream => {
+      const videoElm = document.getElementById('their-video')
+      videoElm.srcObject = stream;
+      videoElm.play();
+    });
+  }
+
+  handleChangeTheirId = (event) => {
+    this.setState({theirId: event.target.value});
   }
 
   render() {
     return (
       <div className="App">
         <video id="my-video" width="400px" autoPlay muted playsInline></video>
-        <p id="my-id">{this.state.myId}</p>
+        <p>{this.state.myId}</p>
+        <input type="text" value={this.state.theirId} onChange={this.handleChangeTheirId} />
+        <button onClick={() => this.makeCall()}>発信</button>
+        <video id="their-video" width="400px" autoPlay playsInline></video>
       </div>
     );
   }
