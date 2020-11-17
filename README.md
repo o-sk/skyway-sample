@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Settings
+
+Set your api key in the following file
+
+```.env.local
+REACT_APP_SKYWAY_API_KEY={{YOUR API KEY}}
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
