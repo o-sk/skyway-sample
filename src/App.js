@@ -57,11 +57,20 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <video id="my-video" width="400px" autoPlay muted playsInline></video>
-        <p>{this.state.myId}</p>
-        <input type="text" value={this.state.theirId} onChange={this.handleChangeTheirId} />
-        <button onClick={() => this.makeCall()}>発信</button>
-        <video id="their-video" width="400px" autoPlay playsInline></video>
+        <h1 className="Head">Skyway sample</h1>
+        <div className="Container">
+          <div className="MyVideo">
+            <video id="my-video" width="400px" autoPlay muted playsInline></video>
+            <p>MyID: {this.state.myId}</p>
+            <div>
+              <input type="text" value={this.state.theirId} onChange={this.handleChangeTheirId} />
+              <button onClick={() => this.makeCall()}>発信</button>
+            </div>
+          </div>
+          <div className="TheirVideo">
+            <video id="their-video" width="400px" autoPlay playsInline></video>
+          </div>
+        </div>
       </div>
     );
   }
