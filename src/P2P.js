@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import Peer from 'skyway-js';
 import './P2P.css';
 
@@ -57,7 +58,7 @@ class P2P extends React.Component {
   render() {
     return (
       <div className="P2P">
-        <h1 className="Head">Skyway sample</h1>
+        <h1 className="Head">P2P sample</h1>
         <div className="Container">
           <div className="MyVideo">
             <video id="my-video" width="400px" autoPlay muted playsInline></video>
@@ -71,6 +72,7 @@ class P2P extends React.Component {
             <video id="their-video" width="400px" autoPlay playsInline></video>
           </div>
         </div>
+        <Link to="/">back</Link>
       </div>
     );
   }
