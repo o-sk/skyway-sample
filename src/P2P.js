@@ -1,8 +1,8 @@
 import React from 'react';
 import Peer from 'skyway-js';
-import './App.css';
+import './P2P.css';
 
-class App extends React.Component {
+class P2P extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +56,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="P2P">
         <h1 className="Head">Skyway sample</h1>
         <div className="Container">
           <div className="MyVideo">
@@ -76,4 +76,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default P2P;
